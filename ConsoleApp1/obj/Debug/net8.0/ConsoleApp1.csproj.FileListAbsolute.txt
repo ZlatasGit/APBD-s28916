@@ -1,0 +1,15 @@
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/bin/Debug/net8.0/ConsoleApp1
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/bin/Debug/net8.0/ConsoleApp1.deps.json
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/bin/Debug/net8.0/ConsoleApp1.runtimeconfig.json
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/bin/Debug/net8.0/ConsoleApp1.dll
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/bin/Debug/net8.0/ConsoleApp1.pdb
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.AssemblyInfoInputs.cache
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.AssemblyInfo.cs
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.csproj.CoreCompileInputs.cache
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.sourcelink.json
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.dll
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/obj/Debug/net8.0/refint/ConsoleApp1.dll
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.pdb
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/obj/Debug/net8.0/ConsoleApp1.genruntimeconfig.cache
+/Users/zlata/Developer/Uni/APBD/ConsoleApp1/obj/Debug/net8.0/ref/ConsoleApp1.dll
