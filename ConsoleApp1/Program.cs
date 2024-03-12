@@ -2,7 +2,7 @@
 string userInput = Console.ReadLine();
 int number = int.Parse(userInput);
 if(number<0){
-    Console.WriteLine(number+" is smaller than zero");
+    Console.WriteLine(number+" is smaller than zero!");
 } else if(number>0){
     Console.WriteLine(number+" is greater than zero");
 } else {
