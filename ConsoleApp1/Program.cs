@@ -8,10 +8,10 @@ if(number<0){
 } else {
     Console.WriteLine("entered number is zero");
 }
-Console.WriteLine(myFunc([4, 2, 6]));
+Console.WriteLine(CalculateAvg([4, 2, 6]));
 Console.WriteLine(returnMax([1,2,3]));
 
-static double myFunc(int[] ints){
+static double CalculateAvg(int[] ints){
     int sum = 0;
     foreach(int num in ints){
         sum += num;
