@@ -8,17 +8,17 @@ if(number<0){
 } else {
     Console.WriteLine("entered number is zero");
 }
-Console.WriteLine(myFunc([4, 2, 6]));
-Console.WriteLine(returnMax([1,2,3]));
+Console.WriteLine(CalculateAverage([4, 2, 6]));
+Console.WriteLine(ReturnMax([1,2,3]));
 
-static double myFunc(int[] ints){
+static double CalculateAverage(int[] arr){
     int sum = 0;
-    foreach(int num in ints){
+    foreach(int num in arr){
         sum += num;
     }
-    return sum/ints.Length;
+    return sum/arr.Length;
 }
 
-static int returnMax(int[] ints){
+static int ReturnMax(int[] ints){
     return ints.Max();
 }
