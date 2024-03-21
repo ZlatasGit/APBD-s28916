@@ -1,0 +1,60 @@
+commit 8efee534623b8896f65575c6c5a2139b91ba7275
+Merge: 1ce37c7 1be3fa2
+Author: Zlata <zlata@172.23.66.229.wi-fi.pjwstk.edu.pl>
+Date:   Tue Mar 12 13:20:36 2024 +0100
+
+    conflict resolved
+
+commit 1ce37c749cdf464c91462be210aa198accaaa2a6
+Author: Zlata <zlata@172.23.66.229.wi-fi.pjwstk.edu.pl>
+Date:   Tue Mar 12 13:16:32 2024 +0100
+
+    main change commit
+
+commit 1be3fa2191da200183d36d91835f5536a28b1601
+Author: Zlata <zlata@172.23.66.229.wi-fi.pjwstk.edu.pl>
+Date:   Tue Mar 12 13:15:06 2024 +0100
+
+    Feature-new commit
+
+commit 6c0245e76454d8b6d3b9908fb35651a06e25c449
+Author: Zlata <zlata@172.23.66.229.wi-fi.pjwstk.edu.pl>
+Date:   Tue Mar 12 13:04:13 2024 +0100
+
+    added feature-max functionality
+
+commit 9962d6a546c05b721b7bd942711fedfae07f556d
+Author: Zlata <zlata@172.23.66.229.wi-fi.pjwstk.edu.pl>
+Date:   Tue Mar 12 12:57:51 2024 +0100
+
+    added neccesary functionality
+
+commit 8b8ded51fe30a547c276b96fbe2b4849ae63cfdd
+Author: Zlata <zlata@172.23.66.229.wi-fi.pjwstk.edu.pl>
+Date:   Tue Mar 12 12:41:08 2024 +0100
+
+    Modification 3
+
+commit 66efb7972959b7668a401b3bf6f8101aee63d0a8
+Author: Zlata <zlata@172.23.66.229.wi-fi.pjwstk.edu.pl>
+Date:   Tue Mar 12 12:40:20 2024 +0100
+
+    Modification 2
+
+commit a3c7ced52541c2305595519aa2bc3047e018de91
+Author: ZlatasGit <zlatayan.des@gmail.com>
+Date:   Sun Mar 10 21:06:18 2024 +0100
+
+    added new project, created console application
+
+commit 3a5a9780a6f7beede45ca89512503d7f943aecfe
+Author: ZlatasGit <zlatayan.des@gmail.com>
+Date:   Sun Mar 10 20:33:39 2024 +0100
+
+    added .gitignore
+
+commit ce0fa19d40b41e5ad184cf5ad7976a62505d5980
+Author: ZlatasGit <zlatayan.des@gmail.com>
+Date:   Tue Mar 5 12:58:07 2024 +0100
+
+    first commit

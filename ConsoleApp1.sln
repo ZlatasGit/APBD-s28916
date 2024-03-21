@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{1B31493A-8B77-434C-B5CB-27147284FFBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainerManagerApp", "ContainerManagerApp\ContainerManagerApp.csproj", "{DD9B61E5-122C-4D21-B130-AFA50CB2B22C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{1B31493A-8B77-434C-B5CB-27147284FFBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B31493A-8B77-434C-B5CB-27147284FFBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B31493A-8B77-434C-B5CB-27147284FFBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD9B61E5-122C-4D21-B130-AFA50CB2B22C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD9B61E5-122C-4D21-B130-AFA50CB2B22C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD9B61E5-122C-4D21-B130-AFA50CB2B22C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD9B61E5-122C-4D21-B130-AFA50CB2B22C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
