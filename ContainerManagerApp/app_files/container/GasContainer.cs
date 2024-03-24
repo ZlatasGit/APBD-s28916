@@ -1,11 +1,9 @@
 namespace ContainerManagerApp{
     public class GasContainer : Container, IHazardNotifier
     {
-        public GasContainer(int serialNumber, double height, double depth) 
+        public GasContainer(int serialNumber, double height, double depth, double maxPayload) : base(serialNumber,height,depth,maxPayload)
         {
             SerialNumber = GenerateSerialNumber("G", serialNumber);
-            Height = height;
-            Depth = depth;
             IsHazardous = false;
             //liters
             Volume = depth*height*height/100;
@@ -13,7 +11,7 @@ namespace ContainerManagerApp{
             Pressure = 1;
             CargoWeight = Pressure*101325*Volume*28.97/(8.3145*273.15);
             //mass of air at 5 atm
-            MaxPayload = 5*101325*Volume*28.97/(8.3145*273.15);
+            // MaxPayload = 5*101325*Volume*28.97/(8.3145*273.15);
         }
 
         private bool IsHazardous;
@@ -24,15 +22,18 @@ namespace ContainerManagerApp{
 
         public override bool LoadCargo(Cargo cargo)
         {
+            //check if cargo is of correct type
             if (!cargo.GetType().Equals("GasCargo"))
             {
                 throw new InvalidCastException("Cannot load " + cargo.GetType() + " into Liquid container.");
             }
             GasCargo gasCargo = (GasCargo)cargo;
-
+            double NewPressure = CalculatePressure(gasCargo.GetN(),0);
             if (CargoWeight + gasCargo.GetWeight() > MaxPayload)
             {
-                throw new OverfillException("Cargo weight exceeds the maximum payload");
+                throw new OverfillException("Cargo weight exceeds the maximum payload.");
+            } else if(NewPressure>Pressure){
+                throw new OverfillException("Cargo pressure exceeds the maximum pressure of 5 atm.");
             }
             if (!IsHazardous && gasCargo.GetIsHazardous())
             {
@@ -45,7 +46,7 @@ namespace ContainerManagerApp{
             }
             CargoWeight += gasCargo.GetWeight();
             //we assume that gas container is always at 0 degrees celcius
-            Pressure = CalculatePressure(gasCargo.GetN(), 0);
+            Pressure = NewPressure;
             return true;
         }
 
@@ -57,10 +58,11 @@ namespace ContainerManagerApp{
         {
             string Info = "Available capacity="+(MaxPayload-CargoWeight)+" kg, ";
             if (IsHazardous){
-                Info+="Contains hazardous cargo";
+                Info+="Contains hazardous cargo, ";
             } else {
-                Info+="Doesn't contain hazardous cargo";
+                Info+="Doesn't contain hazardous cargo, ";
             }
+            Info+="Pressure="+Pressure;
             return SerialNumber+"( "+Info+" )";
         }
         public void NotifyHazard(string message)

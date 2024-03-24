@@ -2,10 +2,9 @@ namespace ContainerManagerApp
 {
     public class LiquidContainer : Container, IHazardNotifier
     {
-        public LiquidContainer(int serialNumber, double cargoMass, double height, double weight, double depth, double maxPayload) 
-        : base(serialNumber, cargoMass, height, weight, depth, maxPayload)
+        public LiquidContainer(int serialNumber, double height, double depth, double maxPayload) : base(serialNumber, height, depth, maxPayload)
         {
-            SetSerialNumber("L",serialNumber);
+            SerialNumber = GenerateSerialNumber("L", serialNumber);
         }
 
         private bool IsHazardous;
@@ -18,6 +17,7 @@ namespace ContainerManagerApp
 
         public override bool LoadCargo(Cargo cargo)
         {
+            //check if cargo is of correct type
             if(!cargo.GetType().Equals("LiquidCargo")) {
                 throw new InvalidCastException("Cannot load "+cargo.GetType()+" into Liquid container.");
             }
@@ -50,7 +50,13 @@ namespace ContainerManagerApp
 
         public override string Info()
         {
-            throw new NotImplementedException();
+            string Info = "Available capacity="+(MaxPayload-CargoWeight)+" kg, ";
+            if (IsHazardous){
+                Info+="Contains hazardous cargo";
+            } else {
+                Info+="Doesn't contain hazardous cargo";
+            }
+            return SerialNumber+"( "+Info+" )";
         }
     }
 }

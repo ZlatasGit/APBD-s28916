@@ -1,5 +1,5 @@
 namespace ContainerManagerApp;
-public abstract class Container(int serialNumber, double height, double depth)
+public abstract class Container(int serialNumber, double height, double depth, double maxPayload)
 {
     protected string SerialNumber = serialNumber.ToString();
     //kg
@@ -11,7 +11,7 @@ public abstract class Container(int serialNumber, double height, double depth)
     //cm
     protected double Depth = depth;
     //kg
-    protected double MaxPayload = 0;
+    protected double MaxPayload = maxPayload;
 
     protected string GenerateSerialNumber(string type, int serialNumber)
     {
