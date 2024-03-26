@@ -50,7 +50,7 @@ namespace ContainerManagerApp
 
         public override string Info()
         {
-            string Info = "Available capacity="+(MaxPayload-CargoWeight)+" kg, ";
+            string Info = "Available capacity = "+(MaxPayload-CargoWeight)+" kg, ";
             if (IsHazardous){
                 Info+="Contains hazardous cargo";
             } else {

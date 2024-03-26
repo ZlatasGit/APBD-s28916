@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text.Encodings.Web;
 
-namespace ContainerManagerApp.Controllers
+namespace ContainerManagerApp
 {
     public class DockController(DockModel model, DockView view)
     {
@@ -112,6 +112,7 @@ namespace ContainerManagerApp.Controllers
                     {
                         Console.WriteLine(e.Message);
                     }
+                    View.ShowSuccess("Container has been loaded");
                     break;
                 case 7:
                     //7. Unload a container");
@@ -122,9 +123,9 @@ namespace ContainerManagerApp.Controllers
                     }
                     catch (System.Exception e)
                     {
-                        Console.WriteLine(e.Message);
+                        View.ShowException(e.Message);
                     }
-                    Console.WriteLine("Container has been emptied.");
+                    View.ShowSuccess("Container has been emptied.");
                     break;
                 case 8:
                     //8. Show containers on a ship");
@@ -158,6 +159,7 @@ namespace ContainerManagerApp.Controllers
                         
                         throw;
                     }
+                    View.ShowSuccess("Cargo has been loaded");
                     break;
                 default:
                     break;

@@ -1,4 +1,4 @@
-using System.Data;
+using System;
 using System.Runtime.InteropServices; 
 
 namespace ContainerManagerApp
@@ -92,14 +92,14 @@ namespace ContainerManagerApp
                 throw new ArgumentException("Invalid container type provided.");
             }
 
-            height = ReadPositiveDouble("Enter height: ");
-            depth = ReadPositiveDouble("Enter depth: ");
-            maxPayload = ReadPositiveDouble("Enter maximum payload: ");
+            height = ReadPositiveDouble("Enter height in m: ");
+            depth = ReadPositiveDouble("Enter depth in m: ");
+            maxPayload = ReadPositiveDouble("Enter maximum payload in kg: ");
 
             if (containerType.Equals("r"))
             {
-                temperature[0] = ReadPositiveDouble("Enter lower temperature range");
-                temperature[1] = ReadPositiveDouble("Enter upper temperature range");
+                temperature[0] = ReadPositiveDouble("Enter lower temperature range in celcius");
+                temperature[1] = ReadPositiveDouble("Enter upper temperature range in celcius");
                 return (containerType.ToCharArray()[0], (double)height, (double)depth, (double)maxPayload, [(double)temperature[0],(double)temperature[1]]);
             }
             
@@ -114,7 +114,7 @@ namespace ContainerManagerApp
             string? gasType = null;
             string? productType = null;
 
-            weigth = ReadPositiveDouble("Enter weight: ");
+            weigth = ReadPositiveDouble("Enter weight in kg: ");
             switch (cargoType)
             {
                 case 'r':
@@ -139,7 +139,7 @@ namespace ContainerManagerApp
             double maxPayload;
 
             maxPayload = ReadPositiveDouble("Enter max payload in kg:");
-            maxSpeed = (int)ReadPositiveDouble("Enter max speed: ");
+            maxSpeed = (int)ReadPositiveDouble("Enter max speed in knots: ");
             maxContainerCount = (int)ReadPositiveDouble("Enter max amount of containers on this ship: ");
             
             return(maxSpeed, maxContainerCount, maxPayload);
@@ -171,6 +171,18 @@ namespace ContainerManagerApp
                 Console.WriteLine(ship.Info());
             }
             Console.WriteLine();
+        }
+        public void ShowSuccess(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(message+"\n");
+            Console.ResetColor();
+        }
+        public void ShowException(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message+"\n");
+            Console.ResetColor();
         }
     }
 }
