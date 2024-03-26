@@ -15,7 +15,7 @@ public abstract class Container(int serialNumber, double height, double depth, d
 
     protected string GenerateSerialNumber(string type, int serialNumber)
     {
-        return "KON-"+type+"-"+(serialNumber+1);
+        return "kon-"+type+"-"+(serialNumber);
     }
     public abstract string Info();
     public abstract void EmptyCargo();

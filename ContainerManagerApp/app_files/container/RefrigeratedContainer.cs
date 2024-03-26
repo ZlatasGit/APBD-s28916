@@ -5,7 +5,7 @@ namespace ContainerManagerApp
         public RefrigeratedContainer(int serialNumber, double height, double depth, double maxPayload, double[] temperature) 
         : base(serialNumber, height, depth, maxPayload)
         {
-            SerialNumber = GenerateSerialNumber("R", serialNumber);
+            SerialNumber = GenerateSerialNumber("r", serialNumber);
             MaintainedTemperature = temperature;
         }
 

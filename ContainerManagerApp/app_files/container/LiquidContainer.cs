@@ -4,7 +4,7 @@ namespace ContainerManagerApp
     {
         public LiquidContainer(int serialNumber, double height, double depth, double maxPayload) : base(serialNumber, height, depth, maxPayload)
         {
-            SerialNumber = GenerateSerialNumber("L", serialNumber);
+            SerialNumber = GenerateSerialNumber("l", serialNumber);
         }
 
         private bool IsHazardous;

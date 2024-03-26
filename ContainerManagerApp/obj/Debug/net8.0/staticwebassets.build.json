@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Y0svJslxB5j9KbHAiR3w1+d2Vhg7VashZw/fMoujiIA=",
+  "Source": "ContainerManagerApp",
+  "BasePath": "_content/ContainerManagerApp",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

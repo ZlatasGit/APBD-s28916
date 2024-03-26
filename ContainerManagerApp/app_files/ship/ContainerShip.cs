@@ -10,7 +10,7 @@ namespace ContainerManagerApp{
             //kg
             MaxWeight = maxWeight;
             Containers = [];
-            SerialNumber = "SHP-"+serialNumber;
+            SerialNumber = "shp-"+serialNumber;
         }
         private string SerialNumber {get;}
 
@@ -23,6 +23,8 @@ namespace ContainerManagerApp{
         public double MaxWeight { get; }
         public double CargoWeight { get; set; }
         public string GetSerialNumber() => SerialNumber;
+        public List<string> GetContainersKeys() => [.. Containers.Keys];
+        public List<Container> GetContainers() => [.. Containers.Values];
 
         public void AddContainer(Container container)
         {

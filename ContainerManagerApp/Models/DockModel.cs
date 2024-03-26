@@ -3,19 +3,27 @@ using System.Runtime.InteropServices;
 
 namespace ContainerManagerApp
 {
-    public class DockService
+    public class DockModel
     {
-        public DockService()
+        public DockModel()
         {
             Containers = [];
             Ships = [];
             ContainersOnShips = [];
         }
         
-        public Dictionary<string,Container> Containers { get; set; }
-        public Dictionary<string, ContainerShip> Ships { get; set; }
-        public Dictionary<string, ContainerShip> ContainersOnShips { get; set; }
+        private int ShipId = 10000;
+        private int ContainerId = 10000;
 
+        private Dictionary<string,Container> Containers { get; set; }
+        private Dictionary<string, ContainerShip> Ships { get; set; }
+        private Dictionary<string, ContainerShip> ContainersOnShips { get; set; }
+
+
+        public List<Container> GetContainers() => [.. Containers.Values];
+        public List<ContainerShip> GetShips() => [.. Ships.Values];
+        public ContainerShip FindShip(string serialNumber) => Ships[serialNumber];
+        public Container FindContainer(string serialNumber) => Containers[serialNumber];
 
         public void TransferContainer(string serialNumber, ContainerShip ship){
     
@@ -33,26 +41,27 @@ namespace ContainerManagerApp
         public string CreateContainer(char type, double height, double depth, double maxPayload, [Optional] double[] temperatureRange)
         {
             Container container;
+
             switch (type)
             {
                 case 'g': 
-                    container = new GasContainer(Containers.Count()+10000, height, depth, maxPayload); 
+                    container = new GasContainer(ContainerId, height, depth, maxPayload); 
                     Containers.Add(container.GetSerialNumber(), container);
-
+                    ContainerId++;
                     return container.GetSerialNumber();
                 case 'r': 
                     if(temperatureRange==null)
                     {
-                        throw new NoNullAllowedException("Ro create a Refrigerated Container the temperatureRange parameter of CreateContainer() method cannot be null.");
+                        throw new NoNullAllowedException("To create a Refrigerated Container the temperatureRange parameter of CreateContainer() method cannot be null.");
                     }
-                    container =  new RefrigeratedContainer(Containers.Count()+10000, height, depth, maxPayload, temperatureRange);
+                    container =  new RefrigeratedContainer(ContainerId, height, depth, maxPayload, temperatureRange);
                     Containers.Add(container.GetSerialNumber(), container);
-
+                    ContainerId++;
                     return container.GetSerialNumber();
                 case 'l': 
-                    container =  new LiquidContainer(Containers.Count()+10000, height, depth, maxPayload);
+                    container =  new LiquidContainer(ContainerId, height, depth, maxPayload);
                     Containers.Add(container.GetSerialNumber(), container);
-
+                    ContainerId++;
                     return container.GetSerialNumber();
             }
             throw new IOException("Invalid type input while trying to create a container");
@@ -74,11 +83,34 @@ namespace ContainerManagerApp
             return IsLoaded;
         }
         public string AddShip( int maxSpeed, int maxContainerAmount, double maxWeight){
-            ContainerShip Ship = new(Ships.Count+1000,maxSpeed,maxContainerAmount,maxWeight);
+            ContainerShip Ship = new(ShipId,maxSpeed,maxContainerAmount,maxWeight);
             Ships.Add(Ship.GetSerialNumber(), Ship);
+            ShipId++;
             return Ship.GetSerialNumber();
         }
-        
+        public void RemoveShip(string serialNumber)
+        {
+            if(Ships.ContainsKey(serialNumber))
+            {
+                foreach (string containerID in ContainersOnShips.Keys.Intersect(Ships[serialNumber].GetContainersKeys()))
+                {
+                    TransferContainer(containerID, null);
+                }
+                Ships.Remove(serialNumber);
+            } else {
+                throw new IOException("Invalid serial number.");
+            }
+        }
+        public void RemoveContainer(string serialNumber){
+            if(Containers.ContainsKey(serialNumber))
+            {
+                if(ContainersOnShips.ContainsKey(serialNumber))
+                {
+                    ContainersOnShips[serialNumber].RemoveContainer(serialNumber);
+                    ContainersOnShips.Remove(serialNumber);
+                }
+                Containers.Remove(serialNumber);
+            }
+        }
     }
-
 }

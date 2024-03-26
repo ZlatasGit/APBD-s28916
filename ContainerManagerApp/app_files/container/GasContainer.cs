@@ -3,7 +3,7 @@ namespace ContainerManagerApp{
     {
         public GasContainer(int serialNumber, double height, double depth, double maxPayload) : base(serialNumber,height,depth,maxPayload)
         {
-            SerialNumber = GenerateSerialNumber("G", serialNumber);
+            SerialNumber = GenerateSerialNumber("g", serialNumber);
             IsHazardous = false;
             //liters
             Volume = depth*height*height/100;
