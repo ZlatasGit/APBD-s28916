@@ -6,6 +6,7 @@ namespace ContainerManagerApp
         private double Weight { get; } = weight;
 
         public double GetWeight() => Weight;
+        public abstract string GetCargoType();
     }
 
 }

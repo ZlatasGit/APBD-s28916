@@ -15,14 +15,14 @@ namespace ContainerManagerApp
         public override bool LoadCargo(Cargo cargo)
         {
             //check if cargo is of correct type
-            if(!cargo.GetType().Equals("ProduceCargo")) {
+            if(!cargo.GetCargoType().Equals("p")) {
                 throw new InvalidCastException("Cannot load "+cargo.GetType()+" into Refrigerated container.");
             }
             ProduceCargo produceCargo = (ProduceCargo)cargo;
             if (CargoWeight+produceCargo.GetWeight()>MaxPayload)
             {
                 throw new OverfillException("Cargo weight exceeds the maximum payload");
-            } else if (!ProductType.Equals(produceCargo.GetProductType()))
+            } else if (!ProductType.Equals(produceCargo.GetProductType())&&!ProductType.Equals(""))
             {
                 throw new UnsupportedProductTypeException(
                     "Cargo of type "+produceCargo.GetProductType()+" cannot be loaded into container with "+ProductType+" cargo."

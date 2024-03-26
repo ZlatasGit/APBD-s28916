@@ -23,9 +23,9 @@ namespace ContainerManagerApp{
         public override bool LoadCargo(Cargo cargo)
         {
             //check if cargo is of correct type
-            if (!cargo.GetType().Equals("GasCargo"))
+            if (!cargo.GetCargoType().Equals("g"))
             {
-                throw new InvalidCastException("Cannot load " + cargo.GetType() + " into Liquid container.");
+                throw new InvalidCastException("Cannot load " + cargo.GetType() + " into Liquid container.\n");
             }
             GasCargo gasCargo = (GasCargo)cargo;
             double NewPressure = CalculatePressure(gasCargo.GetN(),0);
@@ -33,15 +33,15 @@ namespace ContainerManagerApp{
             {
                 throw new OverfillException("Cargo weight exceeds the maximum payload.");
             } else if(NewPressure>Pressure){
-                throw new OverfillException("Cargo pressure exceeds the maximum pressure of 5 atm.");
+                throw new OverfillException("Cargo pressure exceeds the maximum pressure of 5 atm.\n");
             }
             if (!IsHazardous && gasCargo.GetIsHazardous())
             {
-                NotifyHazard("Hazardous cargo has been loaded.");
+                NotifyHazard("Hazardous cargo has been loaded.\n");
             }
             else if (IsHazardous && !gasCargo.GetIsHazardous())
             {
-                NotifyHazard("Non-hazardous cargo cannot be loaded into a container with hazardous leftovers.");
+                NotifyHazard("Non-hazardous cargo cannot be loaded into a container with hazardous leftovers.\n");
                 return false;
             }
             CargoWeight += gasCargo.GetWeight();
@@ -56,13 +56,13 @@ namespace ContainerManagerApp{
         }
         public override string Info()
         {
-            string Info = "Available capacity="+(MaxPayload-CargoWeight)+" kg, ";
+            string Info = "Available capacity = "+(MaxPayload-CargoWeight)+" kg, ";
             if (IsHazardous){
                 Info+="Contains hazardous cargo, ";
             } else {
                 Info+="Doesn't contain hazardous cargo, ";
             }
-            Info+="Pressure="+Pressure;
+            Info+="Pressure = "+Pressure+" atm";
             return SerialNumber+"( "+Info+" )";
         }
         public void NotifyHazard(string message)
@@ -70,6 +70,6 @@ namespace ContainerManagerApp{
             IsHazardous = true;
             throw new HazardException(message);
         }
-        private double CalculatePressure(double n, double celcius) => n * 8.3145 * (celcius + 273.15) / (Volume * 101325);
+        private double CalculatePressure(double n, double celcius) => n * 8.3145 * (celcius + 273.15) / (Volume * 1000 * 101325);
     }
 }

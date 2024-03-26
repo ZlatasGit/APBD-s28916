@@ -14,6 +14,7 @@ namespace ContainerManagerApp
 
         public string GetProductType() => ProductType;
         public double GetStorageTemperature() => StorageTemperature;
+        public override string GetCargoType() => "p";
     }
 
 }

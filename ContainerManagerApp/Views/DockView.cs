@@ -26,6 +26,7 @@ namespace ContainerManagerApp
             Console.WriteLine("6. Load a container onto a ship");
             Console.WriteLine("7. Unload a container");
             Console.WriteLine("8. Show containers on a ship");
+            Console.WriteLine("9. Load cargo on container");
 
         }
 
@@ -116,7 +117,7 @@ namespace ContainerManagerApp
             weigth = ReadPositiveDouble("Enter weight: ");
             switch (cargoType)
             {
-                case 'p':
+                case 'r':
                     productType = ReadInput("Provide product type: ").ToLower();
                     return (weigth, null, null, productType);
                 case 'l':

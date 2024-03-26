@@ -139,6 +139,26 @@ namespace ContainerManagerApp.Controllers
                         Console.WriteLine(e.Message);
                     }
                     break;
+                case 9:
+                    //9. Load cargo in container
+                    try
+                    {
+                        string container = View.ReadInput("Provide container's full serial number:");
+                        char containerType = container.ToCharArray()[4];
+                        (double, bool?, string, string) cargoInfo = View.ReadCargoInfo(containerType);
+                        switch (containerType)
+                        {
+                            case 'r': Model.LoadToContainer(container, new ProduceCargo(cargoInfo.Item1,cargoInfo.Item4)); break;
+                            case 'l': Model.LoadToContainer(container, new LiquidCargo(cargoInfo.Item1, (bool)cargoInfo.Item2)); break;
+                            case 'g': Model.LoadToContainer(container, new GasCargo(cargoInfo.Item1, (bool)cargoInfo.Item2, cargoInfo.Item3)); break;
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        
+                        throw;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -151,7 +171,7 @@ namespace ContainerManagerApp.Controllers
                 optionsCount = 3;
             } else if (Model.GetShips().Count>0&&Model.GetContainers().Count>0)
             {
-                optionsCount = 8;
+                optionsCount = 9;
             }
             return optionsCount;
         }

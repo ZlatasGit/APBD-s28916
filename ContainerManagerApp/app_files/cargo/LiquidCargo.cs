@@ -6,6 +6,7 @@ namespace ContainerManagerApp
 
 
         public bool GetIsHazardous() => IsHazardous;
+        public override string GetCargoType() => "l";
     }
 
 }

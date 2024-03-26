@@ -19,6 +19,7 @@ namespace ContainerManagerApp
         private double N {get;}
         public bool GetIsHazardous() => IsHazardous;
         public double GetN() => N;
+        public override string GetCargoType() => "g";
     }
 
 }

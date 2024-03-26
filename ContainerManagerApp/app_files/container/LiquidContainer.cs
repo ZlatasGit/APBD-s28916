@@ -18,7 +18,7 @@ namespace ContainerManagerApp
         public override bool LoadCargo(Cargo cargo)
         {
             //check if cargo is of correct type
-            if(!cargo.GetType().Equals("LiquidCargo")) {
+            if(!cargo.GetCargoType().Equals("l")) {
                 throw new InvalidCastException("Cannot load "+cargo.GetType()+" into Liquid container.");
             }
             LiquidCargo liquidCargo = (LiquidCargo)cargo;
