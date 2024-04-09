@@ -1,0 +1,11 @@
+{
+    "projectManager.tags": [
+        "Personal",
+        "Work",
+        "Uni"
+    ],
+    "projectManager.git.baseFolders": [
+        "/Users/zlata/Developer/Uni"
+    ],
+    "projectManager.git.maxDepthRecursion": 6
+}
