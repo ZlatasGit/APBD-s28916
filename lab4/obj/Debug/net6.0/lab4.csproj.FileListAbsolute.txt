@@ -1,0 +1,8 @@
+/Users/zlata/Developer/Uni/APBD/lab4/obj/Debug/net6.0/lab4.csproj.AssemblyReference.cache
+/Users/zlata/Developer/Uni/APBD/lab4/obj/Debug/net6.0/lab4.GeneratedMSBuildEditorConfig.editorconfig
+/Users/zlata/Developer/Uni/APBD/lab4/obj/Debug/net6.0/lab4.AssemblyInfoInputs.cache
+/Users/zlata/Developer/Uni/APBD/lab4/obj/Debug/net6.0/lab4.AssemblyInfo.cs
+/Users/zlata/Developer/Uni/APBD/lab4/obj/Debug/net6.0/lab4.csproj.CoreCompileInputs.cache
+/Users/zlata/Developer/Uni/APBD/lab4/obj/Debug/net6.0/lab4.MvcApplicationPartsAssemblyInfo.cs
+/Users/zlata/Developer/Uni/APBD/lab4/obj/Debug/net6.0/lab4.MvcApplicationPartsAssemblyInfo.cache
+/Users/zlata/Developer/Uni/APBD/lab4/obj/Debug/net6.0/lab4.sourcelink.json

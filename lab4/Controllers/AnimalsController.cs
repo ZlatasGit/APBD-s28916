@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace lab4
 {
@@ -6,24 +7,32 @@ namespace lab4
     [Route("[controller]")]
     class AnimalsController : ControllerBase
     {
-        private static List<Animal> animals = [];
+        public static List<Animal> animals = 
+        [
+            new Animal()
+            {
+                Category = "cat", Name = "fluffy", Weight = 3.2, FurColor = "white"
+            },
+            new Animal()
+            {
+                Category = "dog", Name = "daisy", Weight = 7.4, FurColor = "black"
+            }
+        ];
 
-        [HttpGet] // retrieve all animals
-        public IActionResult Get() => Ok(animals);
+        [HttpGet("/animals")] // retrieve all animals
+        public IActionResult GetAll() => Ok(animals);
 
         [HttpGet("{id}")] // retrieve animal by id
         public IActionResult Get(Guid id)
         {
-            var animal = animals.FirstOrDefault(a => a.Id == id);
-            if (animal == null) return NotFound();
-            return Ok(animal);
+            return Ok(animals.Find(a => a.Id == id));
         }
 
-        [HttpPost] // add animal
+        [HttpPost("{id}")]
         public IActionResult Post(Animal animal)
         {
             animals.Add(animal);
-            return CreatedAtAction(nameof(Get), new { id = animal.id}, animal);
+            return CreatedAtAction(nameof(Get), new { id = animal.Id}, animal);
         }
 
         [HttpPut("{id}")] // update animal by id
