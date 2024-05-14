@@ -124,46 +124,32 @@ public class DoctorRepository : IDoctorRepository
 
     public async Task DeleteDoctor(int id)
     {
+        var delete_medicament = "DELETE FROM Prescription_Medicament WHERE IdPrescription IN (SELECT IdPrescription FROM Prescription WHERE IdDoctor = @IdDoctor)";
+        var delete_prescription = "DELETE FROM Prescription WHERE IdDoctor = @IdDoctor";
+        var delete_doctor = "DELETE FROM Doctor WHERE IdDoctor = @IdDoctor";
         using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Docker"));
+        using SqlCommand command = new SqlCommand();
+        command.Connection = connection;
+        
         await connection.OpenAsync();
-        var command = new SqlCommand();
-
+        
         DbTransaction transaction = await connection.BeginTransactionAsync();
         command.Transaction = (SqlTransaction)transaction;
-
         try
         {
-            command.Connection = connection;
-            command.CommandText = "SELECT COUNT(*) FROM Prescription WHERE IdDoctor = @IdDoctor";
+            command.Parameters.Clear();
+            command.CommandText = delete_medicament;
             command.Parameters.AddWithValue("@IdDoctor", id);
+            await command.ExecuteNonQueryAsync();
+            
+            command.Parameters.Clear();
+            command.CommandText = delete_prescription;
+            command.Parameters.AddWithValue("@IdDoctor", id);
+            await command.ExecuteNonQueryAsync();
 
-            int prescriptionCount = (int)await command.ExecuteScalarAsync();
-
-            if (prescriptionCount > 0)
-            {
-                command.CommandText = "SELECT IdPrescription FROM Prescription WHERE IdDoctor = @IdDoctor";
-                var prescriptionIds = new List<int>();
-                using (var reader = await command.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        prescriptionIds.Add(reader.GetInt32(0));
-                    }
-                }
-
-                foreach (var prescriptionId in prescriptionIds)
-                {
-                    command.CommandText = "DELETE FROM Prescription_Medicament WHERE IdPrescription = @IdPrescription";
-                    command.Parameters.Clear();
-                    command.Parameters.AddWithValue("@IdPrescription", prescriptionId);
-                    await command.ExecuteNonQueryAsync();
-                }
-
-                command.CommandText = "DELETE FROM Prescription WHERE IdDoctor = @IdDoctor";
-                await command.ExecuteNonQueryAsync();
-            }
-
-            command.CommandText = "DELETE FROM Doctor WHERE IdDoctor = @IdDoctor";
+            command.Parameters.Clear();
+            command.CommandText = delete_doctor;
+            command.Parameters.AddWithValue("@IdDoctor", id);
             await command.ExecuteNonQueryAsync();
 
             await transaction.CommitAsync();
