@@ -53,7 +53,7 @@ public class DoctorRepository : IDoctorRepository
     }*/
     public async Task<DoctorDTO> GetDoctorsPrescriptions(int id)
     {
-        using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Docker"));
+        using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Default"));
         using SqlCommand command = new SqlCommand();
 
         command.Connection = connection;
@@ -87,7 +87,7 @@ public class DoctorRepository : IDoctorRepository
 
     public async Task<bool> FindDoctor(int id)
     {
-        using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Docker"));
+        using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Default"));
         using SqlCommand command = new SqlCommand();
 
         command.Connection = connection;
@@ -102,7 +102,7 @@ public class DoctorRepository : IDoctorRepository
 
     public async Task<DoctorDTO> GetDoctor(int id)
     {
-        using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Docker"));
+        using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Default"));
         using SqlCommand command = new SqlCommand();
 
         command.Connection = connection;
@@ -127,7 +127,7 @@ public class DoctorRepository : IDoctorRepository
         var delete_medicament = "DELETE FROM Prescription_Medicament WHERE IdPrescription IN (SELECT IdPrescription FROM Prescription WHERE IdDoctor = @IdDoctor)";
         var delete_prescription = "DELETE FROM Prescription WHERE IdDoctor = @IdDoctor";
         var delete_doctor = "DELETE FROM Doctor WHERE IdDoctor = @IdDoctor";
-        using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Docker"));
+        using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Default"));
         using SqlCommand command = new SqlCommand();
         command.Connection = connection;
         
