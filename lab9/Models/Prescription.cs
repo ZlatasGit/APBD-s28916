@@ -10,7 +10,9 @@ public class Prescription
     public int IdPatient { get; set; }
     public int IdDoctor { get; set; }
     [ForeignKey(nameof(IdDoctor))]
-    public virtual Doctor IdDoctorNavigation { get; set; } = null!;
+    public virtual Doctor Doctor { get; set; } = null!;
     [ForeignKey(nameof(IdPatient))]
-    public virtual Patient IdPatientNavigation { get; set; } = null!;
+    public virtual Patient Patient { get; set; } = null!;
+    public virtual ICollection<PrescriptionMedicament> PrescriptionMedicaments { get; set; } = [];
+
 }

@@ -16,16 +16,16 @@ public class PrescriptionDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<PrescriptionMedicament>()
-            .HasKey(pm => new { pm.PrescriptionId, pm.MedicamentId });
+            .HasKey(pm => new { pm.IdPrescription, pm.IdMedicament });
 
         modelBuilder.Entity<PrescriptionMedicament>()
             .HasOne(pm => pm.Prescription)
             .WithMany(p => p.PrescriptionMedicaments)
-            .HasForeignKey(pm => pm.PrescriptionId);
+            .HasForeignKey(pm => pm.IdPrescription);
 
         modelBuilder.Entity<PrescriptionMedicament>()
             .HasOne(pm => pm.Medicament)
             .WithMany(m => m.PrescriptionMedicaments)
-            .HasForeignKey(pm => pm.MedicamentId);
+            .HasForeignKey(pm => pm.IdMedicament);
     }
 }

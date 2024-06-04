@@ -12,6 +12,6 @@ public class Patient
     public string LastName { get; set; } = "";
     [Required]
     [MaxLength(100)]
-    public string Email { get; set; } = "";
+    public string Birthdate { get; set; } = "";
     public virtual ICollection<Prescription> Prescriptions { get; set; } = [];
 }

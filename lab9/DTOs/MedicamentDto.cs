@@ -3,6 +3,6 @@ using System.ComponentModel.DataAnnotations;
 public class MedicamentDto
 {
     [Key]
-    public int MedicamentId { get; set; }
+    public int IdMedicament { get; set; }
     public int Dose { get; set; }
 }
