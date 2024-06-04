@@ -1,9 +1,18 @@
 namespace Models;
-
+using System.ComponentModel.DataAnnotations;
 public class Medicament
 {
-    int IdMedicament { get; set; }
-    string Name { get; set; }
-    string Description { get; set; }
-    string Type { get; set; }
+    [Key]
+    public int IdMedicament { get; set; }
+    [Required]
+    [MaxLength(100)]
+    public string Name { get; set; } = "";
+    [Required]
+    [MaxLength(100)]
+    public string Description { get; set; } = "";
+    [Required]
+    [MaxLength(100)]
+    public string Type { get; set; } = "";
+
+    public virtual ICollection<PrescriptionMedicament> PrescriptionMedicaments { get; set; } = [];
 }

@@ -1,9 +1,17 @@
 namespace Models;
-
+using System.ComponentModel.DataAnnotations;
 public class Patient
 {
-    int IdPatient { get; set; }
-    string FirstName { get; set; }
-    string LastName { get; set; }
-    string Birthdate { get; set; }
+    [Key]
+    public int IdPatient { get; set; }
+    [Required]
+    [MaxLength(100)]
+    public string FirstName { get; set; } = "";
+    [Required]
+    [MaxLength(100)]
+    public string LastName { get; set; } = "";
+    [Required]
+    [MaxLength(100)]
+    public string Email { get; set; } = "";
+    public virtual ICollection<Prescription> Prescriptions { get; set; } = [];
 }
