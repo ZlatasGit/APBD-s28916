@@ -23,7 +23,7 @@ public class ContractController: ControllerBase
     }
 
     // 5. issue payment for the contract
-    [HttpPost("add-payment/{contractId}")]
+    [HttpPost("add-payment")]
     public async Task<IActionResult> IssuePayment(int contractId, PaymentDTO payment)
     {
         try{

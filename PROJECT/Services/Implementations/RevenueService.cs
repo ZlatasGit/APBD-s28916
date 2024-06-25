@@ -1,5 +1,8 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using PROJECT.Context;
 using PROJECT.Services.Interfaces;
+
 
 namespace PROJECT.Services.Implementations;
 
@@ -21,19 +24,12 @@ public class RevenueService : IRevenueService
         {
             return amount+" PLN"; // No conversion needed if the target currency is PLN
         }
+        var reply = await _httpClient.GetAsync($"https://v6.exchangerate-api.com/v6/5652e416452bb267d2f7cca3/pair/PLN/{targetCurrency.ToUpper()}");
+        reply.EnsureSuccessStatusCode();
 
-        var requestUri = $"https://api.exchangeratesapi.io/latest?base={_baseCurrency}&symbols={targetCurrency.ToUpper()}";
-
-        var response = await _httpClient.GetFromJsonAsync<ExchangeRateApiResponse>(requestUri);
-        if (response != null && response.Rates != null && response.Rates.ContainsKey(targetCurrency.ToUpper()))
-        {
-            double rate = response.Rates[targetCurrency.ToUpper()];
-            return amount * rate+" "+targetCurrency.ToUpper();
-        }
-        else
-        {
-            throw new Exception("Currency conversion failed.");
-        }
+        var content = await reply.Content.ReadAsStringAsync();
+        var response = JsonSerializer.Deserialize<Response>(content);
+        return Convert.ToDouble(response.ConversionRate)*amount+" "+targetCurrency.ToUpper();
     }
 
     public async Task<string> GetPredictedRevenue(int? softwareId, string? currency)
@@ -79,26 +75,47 @@ public class RevenueService : IRevenueService
         }
         foreach (var contract in contracts)
         {
-            // Get all payments for the current contract
             var payments = _repository.Payments
                 .Where(p => p.ContractId == contract.IdContract && p.IsReturned==false)
                 .ToList();
 
-            // Calculate the sum of payment amounts
             double paymentSum = payments.Sum(p => p.Amount);
 
-            // Check if the payment sum equals the contract amount
             if (paymentSum == contract.Amount)
             {
                 revenue += contract.Amount;
+            } else if (contract.EndDate>DateOnly.FromDateTime(DateTime.Today)){
+                revenue += paymentSum;
             }
         }
 
         return  await ConvertCurrency(revenue, currency);
     }
-
-    public class ExchangeRateApiResponse
+    public class Response
     {
-        public Dictionary<string, double> Rates { get; set; }
+        [JsonPropertyName("result")] public string Result { get; set; }
+
+        [JsonPropertyName("documentation")] public string Documentation { get; set; }
+
+        [JsonPropertyName("terms_of_use")] public string TermsOfUse { get; set; }
+
+        [JsonPropertyName("time_last_update_unix")]
+        public long TimeLastUpdateUnix { get; set; }
+
+        [JsonPropertyName("time_last_update_utc")]
+        public string TimeLastUpdateUtc { get; set; }
+
+        [JsonPropertyName("time_next_update_unix")]
+        public long TimeNextUpdateUnix { get; set; }
+
+        [JsonPropertyName("time_next_update_utc")]
+        public string TimeNextUpdateUtc { get; set; }
+
+        [JsonPropertyName("base_code")] public string BaseCode { get; set; }
+
+        [JsonPropertyName("target_code")] public string TargetCode { get; set; }
+
+        [JsonPropertyName("conversion_rate")] public decimal ConversionRate { get; set; }
     }
+    
 }

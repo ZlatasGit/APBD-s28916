@@ -54,20 +54,19 @@ public class ClientService : IClientService
         }
 
         var individualClient = await _repository.IndividualClients.FindAsync(id);
-        if (individualClient != null)
+        if (individualClient != null&&individualClient.IsDeleted==false)
         {
             individualClient.IsDeleted = true;
             await _repository.SaveChangesAsync();
             return new OkResult();
         }
-
-        return new BadRequestResult();
+        throw new Exception("Error when deletenig a client. Client not found.");
     }
 
     public async Task<IActionResult> UpdateClient(int id, IndividualClientUpdateDTO client)
     {
         var individualClient = await _repository.IndividualClients.FindAsync(id);
-        if (individualClient != null)
+        if (individualClient != null&&individualClient.IsDeleted==false)
         {
             individualClient.Address = client.Address;
             individualClient.Email = client.Email;
